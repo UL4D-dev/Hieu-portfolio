@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lê Trung Hiếu - UL4D | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* === BIẾN MÀU SẮC & CÀI ĐẶT CHUNG === */
+        :root {
+            --bg-color: #0f0f11;
+            --surface-color: #1a1a1d;
+            --text-main: #f5f5f5;
+            --text-muted: #a0a0a0;
+            --pr-color: #ea77ff; 
+            --ae-color: #9999ff; 
+            --accent-color: #00e5ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === THANH ĐIỀU HƯỚNG (MENU ĐẦU TRANG) === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 17, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+        nav .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+        nav .logo span {
+            color: var(--accent-color);
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* === BỐ CỤC CHUNG === */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem 4rem;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 3px solid #333;
+            padding-bottom: 15px;
+        }
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        /* === HERO (TIÊU ĐỀ CHÍNH) - HIỆU ỨNG TEXT LIGHT SWEEP CHUẨN XÁC === */
+        #hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 100px;
+        }
+        
+        .hero-text h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            display: inline-block;
+            cursor: pointer;
+            position: relative;
+            
+            /* Màu Gradient chuẩn ban đầu */
+            background: linear-gradient(135deg, var(--pr-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+        }
+
+        .hero-text h1:hover {
+            transform: scale(1.05) translateY(-5px);
+            filter: drop-shadow(0 10px 20px rgba(0, 229, 255, 0.4));
+        }
+
+        /* Dải sáng quét qua đúng vùng chữ mà không bị tràn viền khung */
+        .hero-text h1::after {
+            content: 'Lê Trung Hiếu - UL4D';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.8) 50%, transparent 100%);
+            background-size: 200% 100%;
+            background-position: 200% 0;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            pointer-events: none;
+        }
+
+        .hero-text h1:hover::after {
+            animation: textLightSweep 0.8s ease-in-out forwards;
+        }
+
+        @keyframes textLightSweep {
+            0% {
+                background-position: 200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 700px;
+        }
+
+        /* Hiệu ứng Fade in chữ mượt mà */
+        .fade-in-text {
+            opacity: 0;
+            transform: translateY(15px);
+            animation: fadeInSmooth 1s ease forwards;
+        }
+
+        @keyframes fadeInSmooth {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === ABOUT & SKILLS === */
+        #about {
+            background-color: var(--surface-color);
+            border-top: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+        .about-box {
+            background: rgba(255,255,255,0.03);
+            padding: 3rem;
+            border-radius: 12px;
+            border-left: 5px solid #2ecc71;
+            border-top: 1px solid #333;
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+        .about-box p {
+            margin-bottom: 1.5rem;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .skill-tag {
+            padding: 0.6rem 1.4rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: #2a2a2d;
+            border: 1px solid #444;
+            color: var(--text-main);
+        }
+
+        /* === DỰ ÁN & SẢN PHẨM === */
+        .category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            margin-top: 2rem;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .card {
+            background: var(--surface-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border: 1px solid #333;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.6);
+            border-color: var(--accent-color);
+        }
+        .card-media {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #111;
+        }
+        .card-media img, .card-media iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+        .card-content {
+            padding: 1.5rem;
+        }
+        .card-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        .card-content a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .card-content a:hover {
+            color: var(--accent-color);
+        }
+        .card-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .counter {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* === GÓC LIÊN HỆ CỐ ĐỊNH Ở TRÁI MÀN HÌNH === */
+        .floating-contact {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .float-btn {
+            background: rgba(26, 26, 29, 0.85);
+            backdrop-filter: blur(10px);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #333;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .float-btn:hover {
+            background: var(--accent-color);
+            color: #000;
+            transform: translateX(5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Toast thông báo đã sao chép */
+        .copy-toast {
+            position: absolute;
+            left: 110%;
+            top: 50%;
+            transform: translateY(-50%) scale(0.8);
+            background: #2ecc71;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .copy-toast.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(-50%) scale(1);
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #0a0a0c;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-top: 1px solid #222;
+        }
+        footer h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        footer p {
+            color: var(--text-muted);
+        }
+
+        /* === HIỆU ỨNG ANIMATION (Mờ dần + Bay lên) === */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 2.3rem; }
+            nav ul { display: none; }
+            .project-grid { grid-template-columns: 1fr; }
+            .floating-contact { bottom: 15px; left: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Thanh Menu Điều Hướng Đầu Trang -->
+    <nav>
+        <a href="#hero" class="logo">LÊ TRUNG HIẾU <span>- UL4D</span></a>
+        <ul>
+            <li><a href="#hero">Trang chủ</a></li>
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#projects">Dự án</a></li>
+            <li><a href="#contact">Liên hệ</a></li>
+        </ul>
+    </nav>
+
+    <!-- Header / Hero Section -->
+    <section id="hero">
+        <div class="hero-text">
+            <h1 class="fade-in-text">Lê Trung Hiếu - UL4D</h1>
+            <p class="fade-in-text" style="animation-delay: 0.3s;">Video Editor | 2D Motion Graphics | Visual Storyteller</p>
+        </div>
+    </section>
+
+    <!-- Giới Thiệu -->
+    <section id="about" class="section-container">
+        <h2 class="section-title fade-up">Về <span>Bản Thân</span></h2>
+        <div class="about-box fade-up">
+            <p>Mình là 1 tân sinh viên Học Viện Công nghệ Bưu chính Viễn thông. Với tinh thần nhiệt huyết và sẵn sàng học những thứ mới, đặc biệt là về truyền thông và thiết kế.</p>
+            <p>Đặc biệt, bên cạnh phần mềm truyền thống, mình chủ động cập nhật và ứng dụng các công cụ AI (như công cụ mở rộng background, làm nét hình ảnh) vào quy trình làm việc, giúp tối ưu thời gian xử lý hậu kỳ và nâng cao visual sản phẩm.</p>
+            <p>Giới thiệu thế là đủ rồi nhỉ, giờ các bạn hãy xem 1 vài sản phẩm mình đã từng làm nhé!</p>
+            <div class="skills-container">
+                <div class="skill-tag" style="border-color: var(--pr-color); color: var(--pr-color);">Adobe Premiere Pro</div>
+                <div class="skill-tag" style="border-color: var(--ae-color); color: var(--ae-color);">After Effects</div>
+                <div class="skill-tag">Content Creation</div>
+                <div class="skill-tag">AI Image & Video Processing</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phần Dự Án & Kinh Nghiệm -->
+    <section id="projects" class="section-container">
+        <h2 class="section-title fade-up">Dự Án <span>Thực Chiến</span></h2>
+
+        <!-- Kinh nghiệm xây page -->
+        <h3 class="category-title fade-up">Kinh Nghiệm Xây Page</h3>
+        <p class="fade-up" style="color: var(--text-muted); margin-bottom: 2rem; font-style: italic;">Mình hiện đang sở hữu 1 fanpage và 1 trang facebook cá nhân.</p>
+        
+        <div class="project-grid">
+            <!-- Fanpage -->
+            <div class="card fade-up">
+                <div class="card-media">
+                    <a href="https://www.facebook.com/profile.php?id=61566673852096" target="_blank">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" data-real-src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/475471449_122093797677555795_4130099496054779672_n.jpg" alt="Cà Phê không tỉnh" style="background: #242526; object-fit: contain;">
+                    </a>
+                </div>
+                <div class="card-content">
+                    <h3><a href="https://www.facebook.com/profile.php?id=61566673852096" target="_blank">Page Facebook : Cà Phê không tỉnh</a></h3>
+                    <p>Lên kế hoạch nội dung, cắt ghép video viral, đạt mốc <span class="counter" data-target="29000">0</span>+ followers và <span class="counter" data-target="1000000">0</span>+ lượt xem hàng tháng.</p>
+                </div>
+            </div>
+
+            <!-- Trang cá nhân -->
+            <div class="card fade-up" style="transition-delay: 0.2s;">
+                <div class="card-media">
+                    <a href="https://www.facebook.com/HieuUL4D" target="_blank">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" data-real-src="https://scontent.fhan14-2.fna.fbcdn.net/v/t39.30808-6/475471449_122222485506019370_4130099496054779672_n.jpg" alt="Facebook Cá Nhân" style="background: #242526; object-fit: contain;">
+                    </a>
+                </div>
+                <div class="card-content">
+                    <h3><a href="https://www.facebook.com/HieuUL4D" target="_blank">Facebook Cá Nhân</a></h3>
+                    <p>Mục đích chính là để đăng những sản phẩm cá nhân đã làm và phía sau hậu trường.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premiere Pro -->
+        <h3 class="category-title fade-up" style="color: var(--pr-color);">Dự án Premiere Pro</h3>
+        <div class="project-grid">
+            <div class="card fade-up">
+                <div class="card-media">
+                    <iframe src="https://www.youtube.com/embed/Hi1Om1-yBL8" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>Storytelling</h3>
+                    <p>Khai thác nhịp điệu cắt ghép, xử lý âm thanh và dẫn dắt cảm xúc người xem qua lối kể chuyện bằng hình ảnh, tối ưu hóa cho nền tảng video ngắn.</p>
+                </div>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.2s;">
+                <div class="card-media">
+                    <iframe src="https://www.youtube.com/embed/tTzSs53nq1M" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>Kinh nghiệm thực chiến: Kỷ yếu THPT Tây Hồ</h3>
+                    <p>Dự án thực tế thực hiện cho toàn khối 12 trường THPT Tây Hồ. Tối ưu hóa khối lượng source quay lớn, đảm bảo tiến độ và làm nổi bật màu sắc thanh xuân rực rỡ.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- After Effects -->
+        <h3 class="category-title fade-up" style="color: var(--ae-color);">Dự án After Effects</h3>
+        <div class="project-grid">
+            <div class="card fade-up">
+                <div class="card-media">
+                    <iframe src="https://www.youtube.com/embed/_TNK28NTlRQ" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>Motion Graphics & Visuals</h3>
+                    <p>Ứng dụng keyframe và animation để tạo ra các chuyển động đồ họa mượt mà, thiết kế hình ảnh bắt mắt.</p>
+                </div>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.2s;">
+                <div class="card-media">
+                    <iframe src="https://www.youtube.com/embed/XZIvNpnb0Pg" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>VFX & Advanced Motion</h3>
+                    <p>Sản phẩm tập trung mạnh vào kỹ xảo hình ảnh (VFX), compositing chuyên sâu và nhịp độ motion đồ họa phức tạp, mang lại hiệu ứng thị giác ấn tượng.</p>
+                </div>
+            </div>
+            <div class="card fade-up">
+                <div class="card-media">
+                    <iframe src="https://www.youtube.com/embed/O8L47-ikK5I" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>Timelapse Quá Trình Làm Việc</h3>
+                    <p>Ghi lại chi tiết không gian làm việc và thao tác thực chiến từ lúc xây dựng ý tưởng đến khi render hoàn thiện.</p>
+                </div>
+            </div>
+            <div class="card fade-up" style="transition-delay: 0.2s;">
+                <div class="card-media">
+                    <iframe src="https://www.youtube.com/embed/uoIA-PCO9JA" allowfullscreen></iframe>
+                </div>
+                <div class="card-content">
+                    <h3>VFX Breakdown - Phân Tích Dự Án</h3>
+                    <p>Bóc tách từng layer, kỹ thuật mask và các bước compositing đằng sau một shot hình hoàn chỉnh.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mục Mở Rộng -->
+        <h3 class="category-title fade-up" style="color: var(--accent-color);">Mở Rộng</h3>
+        <div class="about-box fade-up" style="border-left-color: var(--accent-color);">
+            <p>Những sản phẩm phía trên chỉ là một vài dấu ấn tiêu biểu. Kho tàng sản phẩm thực tế của mình vẫn còn rất nhiều điều thú vị đang chờ khám phá.</p>
+            <p>Nếu bạn muốn xem toàn bộ năng lực và tư duy dựng hình của mình, hãy đồng hành cùng mình. Hãy trao cho mình cơ hội để chúng ta cùng nhau tạo nên những sản phẩm truyền thông đột phá hơn nữa!</p>
+        </div>
+    </section>
+
+    <!-- Footer / Liên hệ -->
+    <footer id="contact" class="fade-up">
+        <h2>Sẵn sàng cho dự án tiếp theo?</h2>
+        <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Mình luôn mở cửa cho những cơ hội hợp tác mới hoặc các vị trí sáng tạo nội dung.</p>
+        <p style="margin-top: 3rem; font-size: 0.9rem; color: #555;">© 2026 Lê Trung Hiếu (UL4D). All rights reserved.</p>
+    </footer>
+
+    <!-- 3 Nút Liên Hệ Cố Định Góc Trái Màn Hình -->
+    <div class="floating-contact">
+        <!-- Nút Gmail (Copy) -->
+        <div class="float-btn" onclick="copyToClipboard('Hieu.lee0501@gmail.com', this)">
+            ✉️ Gmail: Hieu.lee0501@gmail.com
+            <span class="copy-toast">Đã sao chép!</span>
+        </div>
+        
+        <!-- Nút Facebook (Chuyển hướng) -->
+        <a href="https://www.facebook.com/HieuUL4D" target="_blank" class="float-btn">
+            🌐 Facebook Cá Nhân
+        </a>
+
+        <!-- Nút SĐT (Copy) -->
+        <div class="float-btn" onclick="copyToClipboard('0388708867', this)">
+            📞 SĐT: 0388708867
+            <span class="copy-toast">Đã sao chép!</span>
+        </div>
+    </div>
+
+    <!-- Script xử lý cuộn trang, số đếm, ảnh Facebook và Copy Tự Động -->
+    <script>
+        // Hàm sao chép thông tin và hiển thị thông báo
+        function copyToClipboard(text, element) {
+            navigator.clipboard.writeText(text).then(() => {
+                const toast = element.querySelector('.copy-toast');
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 1500);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Tải ảnh Facebook qua đường dẫn gốc
+            document.querySelectorAll('img[data-real-src]').forEach(img => {
+                img.src = img.getAttribute('data-real-src');
+            });
+
+            // Hiệu ứng Fade-up khi cuộn trang
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-up').forEach((el) => {
+                fadeObserver.observe(el);
+            });
+
+            // Hiệu ứng đếm số (Number Counter)
+            const counters = document.querySelectorAll('.counter');
+            const speed = 100;
+
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        
+                        const updateCount = () => {
+                            const target = +counter.getAttribute('data-target');
+                            const count = +counter.innerText.replace(/,/g, ''); 
+                            const inc = target / speed;
+
+                            if (count < target) {
+                                counter.innerText = Math.ceil(count + inc).toLocaleString('en-US');
+                                setTimeout(updateCount, 25);
+                            } else {
+                                counter.innerText = target.toLocaleString('en-US');
+                            }
+                        };
+                        
+                        updateCount();
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            counters.forEach(counter => {
+                counterObserver.observe(counter);
+            });
+        });
+    </script>
+
+</body>
+</html>
