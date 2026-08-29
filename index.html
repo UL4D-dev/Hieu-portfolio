@@ -91,7 +91,7 @@
             color: var(--accent-color);
         }
 
-        /* === HERO (TIÊU ĐỀ CHÍNH) - HIỆU ỨNG TEXT LIGHT SWEEP CHUẨN XÁC === */
+        /* === HERO (TIÊU ĐỀ CHÍNH) === */
         #hero {
             min-height: 80vh;
             display: flex;
@@ -272,6 +272,73 @@
             font-weight: bold;
         }
 
+        /* === TIMELINE (THÀNH TÍCH) === */
+        .timeline {
+            position: relative;
+            margin: 2rem 0 4rem 1rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--pr-color), var(--accent-color));
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -6px; /* Canh giữa đường kẻ */
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
+        }
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #333;
+            padding: 1.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .timeline-content:hover {
+            transform: translateX(8px);
+            border-color: var(--accent-color);
+        }
+        .timeline-year {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        /* Hiệu ứng Text Phát Sáng */
+        .glow-gold {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .glow-silver {
+            color: #e0e0e0;
+            text-shadow: 0 0 10px rgba(224, 224, 224, 0.8), 0 0 20px rgba(224, 224, 224, 0.5);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
         /* === GÓC LIÊN HỆ CỐ ĐỊNH Ở TRÁI MÀN HÌNH === */
         .floating-contact {
             position: fixed;
@@ -301,13 +368,32 @@
             cursor: pointer;
             position: relative;
         }
-
         .float-btn:hover {
             background: var(--accent-color);
             color: #000;
             transform: translateX(5px);
             border-color: var(--accent-color);
             box-shadow: 0 5px 20px rgba(0, 229, 255, 0.4);
+        }
+
+        /* Button phụ dùng cho mục Timeline */
+        .btn-outline {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border: 1px solid var(--text-muted);
+            color: var(--text-main);
+            transition: all 0.3s;
+            margin-top: 15px;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent-color);
+            background: var(--accent-color);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 229, 255, 0.4);
         }
 
         .copy-toast {
@@ -407,7 +493,6 @@
         <p class="fade-up" style="color: var(--text-muted); margin-bottom: 2rem; font-style: italic;">Mình hiện đang sở hữu 1 fanpage và 1 trang facebook cá nhân.</p>
         
         <div class="project-grid">
-            <!-- Fanpage Cà Phê không tỉnh -->
             <div class="card fade-up">
                 <div class="card-media">
                     <a href="https://www.facebook.com/profile.php?id=61566673852096" target="_blank" style="width: 100%; height: 100%; display: flex;">
@@ -424,7 +509,6 @@
                 </div>
             </div>
 
-            <!-- Facebook Cá Nhân -->
             <div class="card fade-up" style="transition-delay: 0.2s;">
                 <div class="card-media">
                     <a href="https://www.facebook.com/HieuUL4D" target="_blank" style="width: 100%; height: 100%; display: flex;">
@@ -500,6 +584,35 @@
                 <div class="card-content">
                     <h3>VFX Breakdown - Phân Tích Dự Án</h3>
                     <p>Bóc tách chi tiết từng layer, kỹ thuật mask và các bước compositing đằng sau một shot hình hoàn chỉnh.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="category-title fade-up" style="color: var(--accent-color);">Thành Tích Đã Đạt</h3>
+        <div class="timeline">
+            <div class="timeline-item fade-up" style="transition-delay: 0.1s;">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <p>Đạt giải <span class="glow-gold">nhất</span> về thuyết trình "Định hướng tương lai" của trường THPT Tây Hồ.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up" style="transition-delay: 0.3s;">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2025</div>
+                    <p style="margin-bottom: 10px;">Đạt giải <span class="glow-gold">nhất</span> về thuyết trình "Cuộc sống xanh" của trường THPT Tây Hồ.</p>
+                    <p>Đạt giải <span class="glow-silver">ba</span> thuyết trình sách "Gia đình, bạn bè và đất nước" của đoàn trường THPT Tây Hồ.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item fade-up" style="transition-delay: 0.5s;">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <div class="timeline-year">2026</div>
+                    <p>Đạt giải <span class="glow-gold">nhất</span> làm MV của "Trung tâm nghệ thuật nhạc Long Biên" với vai trò là Editor chính cho video.</p>
+                    <a href="https://www.facebook.com/reel/1327905999357664" target="_blank" class="btn-outline">Bấm đây để xem bài viết</a>
                 </div>
             </div>
         </div>
